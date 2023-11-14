@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row flex-md-row flex-column-reverse">
+        <div class="col-md-3">
+            <h2>Account</h2>
+            <a href="{{ path('app_account_password') }}" class="d-block">Modify your password</a>
+            <a href="{{ path('app_account_addresses') }}" class="d-block">Change your adresses</a>
+            <a href="{{ path('app_account_orders') }}" class="d-block">Orders</a>
+        </div>
+        <div class="col-md-9">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

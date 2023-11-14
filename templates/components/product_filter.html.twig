@@ -1,0 +1,24 @@
+<div {{ attributes }}>
+    {% for category in this.categories %}
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input
+                        type="checkbox"
+                        name="query[]"
+                        value="{{ category.id }}"
+                        data-action="live#update"
+                        class="form-check-input"
+                >
+                {{ category.name }}
+            </label>
+        </div>
+    {% endfor %}
+    <p>{{ this.products|length }} products found</p>
+    <div class="row">
+        {% for product in this.products %}
+            <article class="col-md-4">
+                {{ include('components/_product_show.html.twig') }}
+            </article>
+        {% endfor %}
+    </div>
+</div>

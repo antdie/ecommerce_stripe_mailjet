@@ -1,0 +1,18 @@
+<div class="position-relative" {{ attributes }}>
+    <input
+            type="search"
+            name="query"
+            value="{{ query }}"
+            data-action="live#update"
+            class="form-control rounded d-none d-md-inline-block my-auto"
+            placeholder="Search for products"
+            aria-label="Search for products"
+            autocomplete="off"
+    >
+
+    <ul id="searchList" class="list-unstyled bg-white">
+        {% for product in this.products %}
+            <li><a class="text-black" href="{{ path('app_product', {category : product.category.slug, slug : product.slug, id : product.id}) }}">{{ product.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

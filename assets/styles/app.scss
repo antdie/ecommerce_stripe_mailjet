@@ -1,0 +1,32 @@
+//$primary: #000000;
+@import '~bootstrap/scss/bootstrap';
+
+main:not(.IndexController) {
+  padding-top: 3rem;
+}
+#searchList {
+  position: absolute;
+  top: 80%;
+  width: 100%;
+  padding: 0 .75rem;
+  border-radius: 0.25rem;
+}
+label.required:after {
+  content: "*";
+}
+
+/*
+ * Custom translucent site header
+ */
+header {
+  nav {
+    a {
+      color: #c2c2c2;
+      transition: color .2s;
+      text-decoration: none;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

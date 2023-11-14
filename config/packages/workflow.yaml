@@ -1,0 +1,31 @@
+framework:
+    workflows:
+        order:
+            type: state_machine
+            audit_trail:
+                enabled: "%kernel.debug%"
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Order
+            initial_marking: pending
+            places:
+                - pending
+                - expired
+                - paid
+                - assigned
+                - delivered
+            transitions:
+                to_expired:
+                    from: pending
+                    to:   expired
+                to_paid:
+                    from: pending
+                    to:   paid
+                to_assigned:
+                    from: paid
+                    to:   assigned
+                to_delivered:
+                    from: assigned
+                    to:   delivered

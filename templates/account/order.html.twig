@@ -1,0 +1,37 @@
+{% extends 'account/layout.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h1>Order n°{{ order.id }} <small>the {{ order.createdAt|date('m/d/Y') }} ({{ order.state|capitalize }})</small></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in order.orderDetails %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>
+                            {{ ((product.price * product.quantity) / 100)|format_currency('EUR') }}
+                            {% if product.quantity > 1 %}
+                                <br><small>{{ (((product.price * product.quantity) / 100) / product.quantity)|format_currency('EUR') }}/each</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Carrier : {{ order.carrierName }} {{ (order.carrierPrice / 100)|format_currency('EUR') }}</p>
+        <p>Total : {{ (order.total / 100)|format_currency('EUR') }}</p>
+        <a href="{{ path('app_account_orders') }}">Back</a>
+    </div>
+</div>
+{% endblock %}

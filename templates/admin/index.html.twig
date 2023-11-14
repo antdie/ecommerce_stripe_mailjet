@@ -1,0 +1,10 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block page_content %}
+<script>
+    document.querySelector('.sidebar-wrapper #main-menu ul').firstElementChild.classList.add('active');
+</script>
+<img src="{{ asset('build/images/metrics-dashboard.webp') }}" alt="Metrics" class="img-fluid">
+{% endblock %}

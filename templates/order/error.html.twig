@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Payment error</h1>
+            <p>Hey {{ app.user.firstname }} {{ app.user.lastname }},</p>
+            <p>Your payment were aborted.</p>
+            <a href="{{ path('app_order') }}" class="btn btn-primary">Try again here</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

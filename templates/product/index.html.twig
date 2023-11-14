@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>List of products</h1>
+            {{ component('product_filter') }}
+        </div>
+    </div>
+</div>
+{% endblock %}

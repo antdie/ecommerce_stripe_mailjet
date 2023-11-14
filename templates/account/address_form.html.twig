@@ -1,0 +1,19 @@
+{% extends 'account/layout.html.twig' %}
+
+{% block title %}Manage my addresses{% endblock %}
+
+{% block content %}
+<h1>Manage my addresses</h1>
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6">{{ form_row(form.name) }}</div>
+        <div class="col-md-6">{{ form_row(form.company) }}</div>
+        <div class="col-md-6">{{ form_row(form.firstname) }}</div>
+        <div class="col-md-6">{{ form_row(form.lastname) }}</div>
+        <div class="col-md-6">{{ form_row(form.address) }}</div>
+        <div class="col-md-6">{{ form_row(form.code) }}</div>
+        <div class="col-md-6">{{ form_row(form.city) }}</div>
+        <div class="col-md-6">{{ form_row(form.phone) }}</div>
+    </div>
+{{ form_end(form) }}
+{% endblock %}

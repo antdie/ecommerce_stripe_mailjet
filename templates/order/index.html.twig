@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirm my order{% endblock %}
+
+{% block scripts %}
+<script>
+    const subtotal_value = parseFloat(document.getElementById('subtotal-value').dataset.price);
+    const checkout_btn = document.getElementById('checkout-button');
+
+    const span_carrier = document.getElementById('carrier-value');
+    const span_price = document.createElement('span');
+
+    span_price.setAttribute('id', 'total_value');
+    checkout_btn.appendChild(span_price);
+
+    function refresh(e) {
+        const carrier_value = parseFloat(e.dataset.price);
+        const total_value = subtotal_value + carrier_value;
+        const carrier_value_formatted = new Intl.NumberFormat('{{ app.request.locale }}', { style: 'currency', currency: 'EUR' }).format(carrier_value / 100);
+        const total_value_formatted = new Intl.NumberFormat('{{ app.request.locale }}', { style: 'currency', currency: 'EUR' }).format(total_value / 100);
+
+        span_carrier.textContent = carrier_value_formatted;
+        span_price.textContent = ' ' + total_value_formatted;
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+        <div class="row">
+            <h1>Confirm my order</h1>
+            <div class="col-md-6">
+                {{ form_row(form.address) }}
+                {{ form_row(form.carrier) }}
+            </div>
+            <div class="col-md-6">
+                <h2>Recap</h2>
+                {% set total = 0 %}
+                {% for item in cart %}
+                    {% set total = total + item.product.price * item.quantity %}
+                    <div class="row mb-2">
+                        <div class="col-2"><img src="{{ img_path(item.product.image) }}" alt="{{ item.product.name }}" class="img-fluid" width="80" height="80"></div>
+                        <div class="col-6 my-auto">{{ item.product.name }}<br>x{{ item.quantity }}</div>
+                        <div class="col-2 my-auto text-end">
+                            {{ ((item.product.price * item.quantity) / 100)|format_currency('EUR') }}
+                            {% if item.quantity > 1 %}
+                                <br><small>{{ (((item.product.price * item.quantity) / 100) / item.quantity)|format_currency('EUR') }}/each</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <p>Subtotal : <span id="subtotal-value" data-price="{{ (total) }}">{{ (total / 100)|format_currency('EUR') }}</span></p>
+                <p>Delivery : <span id="carrier-value">Pick a carrier</span></p>
+                {{ form_row(form.submit, {'id' : 'checkout-button'}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

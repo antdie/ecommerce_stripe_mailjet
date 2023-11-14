@@ -1,0 +1,5 @@
+<a href="{{ path('app_product', {category : product.category.slug, slug : product.slug, id : product.id}) }}" class="text-decoration-none text-black">
+    <img src="{{ img_path(product.image) }}" alt="{{ product.name }}" class="img-fluid img-thumbnail" loading="lazy">
+    <h2>{{ product.name }}</h2>
+    <p>{{ (product.price / 100)|format_currency('EUR') }}</p>
+</a>
